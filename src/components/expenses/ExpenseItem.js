@@ -1,4 +1,5 @@
 export default function ExpenseItem({ expense }) {
+  // Renders individual expense details
   return (
     <div>
       <h3>{expense.place}</h3>
