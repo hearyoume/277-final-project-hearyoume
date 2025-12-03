@@ -1,11 +1,16 @@
-import { useState } from "react";
+import useExpense from "../hook/use-expense";
 
 export default function BudgetForm({ onAddExpense }) {
-  // Form to add a new expense
-  const [amount, setAmount] = useState("");
-  const [place, setPlace] = useState("");
-  const [category, setCategory] = useState("Food");
-  const [recurring, setRecurring] = useState("one-time");
+  const {
+    amount,
+    setAmount,
+    place,
+    setPlace,
+    category,
+    setCategory,
+    recurring,
+    setRecurring,
+  } = useExpense();
 
   const handleSubmit = (e) => {
     e.preventDefault();
