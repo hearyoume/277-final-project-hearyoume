@@ -1,10 +1,9 @@
-/* eslint-disable use-encapsulation/prefer-custom-hooks */
 import { useState } from "react";
 
-import BudgetForm from "./components/BudgetForm";
-import CategorySummary from "./components/CategorySummary";
-import ExpenseList from "./components/expenses/ExpenseList";
-import FilterControls from "./components/FilterControls";
+import BudgetForm from "./components/budget-form";
+import CategorySummary from "./components/category-summary";
+import ExpenseList from "./components/expenses/expense-list";
+import FilterControls from "./components/filter-controls";
 
 export default function App() {
   // Main application component

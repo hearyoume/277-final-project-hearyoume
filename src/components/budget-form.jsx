@@ -1,4 +1,3 @@
-/* eslint-disable use-encapsulation/prefer-custom-hooks */
 import { useState } from "react";
 
 export default function BudgetForm({ onAddExpense }) {

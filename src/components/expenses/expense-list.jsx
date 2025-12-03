@@ -1,4 +1,4 @@
-import ExpenseItem from "./expenses/ExpenseItem";
+import ExpenseItem from "./expense-item";
 
 export default function ExpenseList({ expenses }) {
   // Renders a list of expenses
