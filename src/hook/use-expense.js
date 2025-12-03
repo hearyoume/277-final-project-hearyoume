@@ -1,7 +1,8 @@
+import { useLocalStorage } from "@uidotdev/usehooks";
 import { useState } from "react";
 
 export default function useExpense() {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useLocalStorage("expenses", []);
   const [filter, setFilter] = useState("all");
   const [amount, setAmount] = useState("");
   const [place, setPlace] = useState("");
