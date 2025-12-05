@@ -23,7 +23,7 @@ export default function BudgetForm({
     e.preventDefault();
     const expense = {
       id: uuidv4(), // always unique
-      amount: parseFloat(amount).toFixed(2), // always 2 decimals
+      amount: parseFloat(amount),
       place,
       category,
       recurring,
