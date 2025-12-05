@@ -8,6 +8,7 @@ export default function App() {
   // Main application component
   const {
     expenses,
+    setExpenses,
     filter,
     setFilter,
     amount,
@@ -25,8 +26,16 @@ export default function App() {
     setTouchedPlace,
   } = useExpense();
 
+  // Handle adding a new expense
   const handleAddExpense = (expense) => {
     addExpense(expense);
+  };
+
+  // Delete an expense by its ID
+  const handleDeleteExpense = (id) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.filter((expense) => expense.id !== id)
+    );
   };
 
   // Filter expenses based on recurrence type
@@ -73,8 +82,10 @@ export default function App() {
           <h2 id="expenses-heading" className="text-xl font-semibold mb-2">
             Expenses
           </h2>
-          <ExpenseList expenses={filteredExpenses} />
-
+          <ExpenseList
+            expenses={filteredExpenses}
+            handleDeleteExpense={handleDeleteExpense}
+          />
           <section
             aria-labelledby="summary-heading"
             className="mt-6 bg-gray-50 p-4 rounded-md shadow"
