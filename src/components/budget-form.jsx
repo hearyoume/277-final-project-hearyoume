@@ -1,3 +1,7 @@
+import { v4 as uuidv4 } from "uuid";
+
+import { isValidAmount, isValidPlace } from "../utils/validators";
+
 export default function BudgetForm({
   amount,
   setAmount,
@@ -12,15 +16,18 @@ export default function BudgetForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     const expense = {
-      amount,
+      id: uuidv4(), // always unique
+      amount: Number(Number(amount).toFixed(2)), // always 2 decimals
       place,
       category,
       recurring,
     };
     onAddExpense(expense);
+
+    // Clear form fields after submission
     setAmount("");
     setPlace("");
-    setCategory("Food");
+    setCategory("Amazon");
     setRecurring("one-time");
   };
 
@@ -30,37 +37,42 @@ export default function BudgetForm({
       className="bg-white p-4 rounded-md shadow space-y-4"
     >
       <div className="mb-2">
-        <label
-          htmlFor="amount-input"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Amount:
-        </label>
+        <label htmlFor="amount-input">Amount:</label>
         <input
           id="amount-input"
           type="number"
-          name="amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full border border-gray-300 rounded px-2 py-1"
+          className={
+            isValidAmount(amount)
+              ? "text-green-600 w-full border rounded px-2 py-1" // valid style
+              : "text-red-600 w-full border rounded px-2 py-1" // invalid style
+          }
         />
+        {!isValidAmount(amount) && (
+          <p className="text-red-500 text-sm">Amount must be greater than 0.</p>
+        )}
       </div>
       <div className="mb-2">
-        <label
-          htmlFor="place-input"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Where it was spent:
-        </label>
+        <label htmlFor="place-input">Where it was spent:</label>
         <input
           id="place-input"
           type="text"
-          name="place"
           value={place}
           onChange={(e) => setPlace(e.target.value)}
-          className="w-full border border-gray-300 rounded px-2 py-1"
+          className={
+            isValidPlace(place)
+              ? "w-full border border-green-500 rounded px-2 py-1" // valid style
+              : "w-full border border-red-500 rounded px-2 py-1" // invalid style
+          }
         />
+        {!isValidPlace(place) && (
+          <p className="text-red-500 text-sm">
+            Place must be between 3 and 50 characters.
+          </p>
+        )}
       </div>
+
       <div className="mb-2">
         <label
           htmlFor="category-select"
@@ -103,6 +115,7 @@ export default function BudgetForm({
               Monthly
             </label>
           </div>
+
           <div className="flex items-center">
             <input
               id="recurring-one-time"
