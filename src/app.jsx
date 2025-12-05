@@ -19,9 +19,12 @@ export default function App() {
     recurring,
     setRecurring,
     addExpense,
+    touchedAmount,
+    setTouchedAmount,
+    touchedPlace,
+    setTouchedPlace,
   } = useExpense();
 
-  
   const handleAddExpense = (expense) => {
     addExpense(expense);
   };
@@ -55,6 +58,10 @@ export default function App() {
             recurring={recurring}
             setRecurring={setRecurring}
             onAddExpense={handleAddExpense}
+            touchedAmount={touchedAmount}
+            setTouchedAmount={setTouchedAmount}
+            touchedPlace={touchedPlace}
+            setTouchedPlace={setTouchedPlace}
           />
         </section>
 
