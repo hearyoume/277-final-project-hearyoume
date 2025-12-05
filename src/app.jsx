@@ -74,17 +74,17 @@ export default function App() {
             Expenses
           </h2>
           <ExpenseList expenses={filteredExpenses} />
-        </section>
 
-        <aside
-          aria-labelledby="summary-heading"
-          className="bg-gray-50 p-4 rounded-md shadow"
-        >
-          <h2 id="summary-heading" className="text-lg font-medium">
-            Category Summary
-          </h2>
-          <CategorySummary expenses={expenses} />
-        </aside>
+          <section
+            aria-labelledby="summary-heading"
+            className="mt-6 bg-gray-50 p-4 rounded-md shadow"
+          >
+            <h2 id="summary-heading" className="text-lg font-medium">
+              Category Summary
+            </h2>
+            <CategorySummary expenses={expenses} />
+          </section>
+        </section>
       </main>
     </>
   );
