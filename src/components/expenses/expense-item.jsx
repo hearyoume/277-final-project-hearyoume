@@ -1,8 +1,10 @@
+import { formatCurrency } from "../../utils/format-currency";
+
 export default function ExpenseItem({ expense, handleDeleteExpense }) {
   // Renders individual expense details
   return (
     <li>
-      {expense.place}: ${expense.amount} ({expense.recurring})
+      {expense.place}: {formatCurrency(expense.amount)} ({expense.recurring})
       {/* Delete button */}
       <button
         onClick={() => handleDeleteExpense(expense.id)}
