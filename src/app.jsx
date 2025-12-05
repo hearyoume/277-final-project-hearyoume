@@ -8,7 +8,6 @@ export default function App() {
   // Main application component
   const {
     expenses,
-    setExpenses,
     filter,
     setFilter,
     amount,
@@ -22,6 +21,7 @@ export default function App() {
     addExpense,
   } = useExpense();
 
+  
   const handleAddExpense = (expense) => {
     addExpense(expense);
   };
