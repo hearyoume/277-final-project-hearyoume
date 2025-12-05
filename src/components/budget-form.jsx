@@ -13,6 +13,10 @@ export default function BudgetForm({
   recurring,
   setRecurring,
   onAddExpense,
+  touchedAmount,
+  setTouchedAmount,
+  touchedPlace,
+  setTouchedPlace,
 }) {
   // Handle form submission
   const handleSubmit = (e) => {
@@ -31,6 +35,8 @@ export default function BudgetForm({
     setPlace("");
     setCategory("Amazon");
     setRecurring("one-time");
+    setTouchedAmount(false);
+    setTouchedPlace(false);
   };
 
   return (
@@ -46,16 +52,12 @@ export default function BudgetForm({
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className={
-            isValidAmount(amount)
-              ? "text-green-600 w-full border rounded px-2 py-1" // valid style
-              : "text-red-600 w-full border rounded px-2 py-1" // invalid style
-          }
+          onBlur={() => setTouchedAmount(true)}
+          className={getAmountClass(amount, touchedAmount)}
         />
-        {!isValidAmount(amount) && (
-          <p className="text-red-500 text-sm">Amount must be greater than 0.</p>
-        )}
+        {getAmountMessage(amount, touchedAmount)}
       </div>
+
       <div className="mb-2">
         <label htmlFor="place-input">Where it was spent:</label>
         <input
@@ -63,17 +65,10 @@ export default function BudgetForm({
           type="text"
           value={place}
           onChange={(e) => setPlace(e.target.value)}
-          className={
-            isValidPlace(place)
-              ? "text-green-600 w-full border rounded px-2 py-1" // valid style
-              : "text-red-600 w-full border rounded px-2 py-1" // invalid style
-          }
+          onBlur={() => setTouchedPlace(true)}
+          className={getPlaceClass(place, touchedPlace)}
         />
-        {!isValidPlace(place) && (
-          <p className="text-red-500 text-sm">
-            Place must be between 3 and 50 characters.
-          </p>
-        )}
+        {getPlaceMessage(place, touchedPlace)}
       </div>
 
       <div className="mb-2">
@@ -150,4 +145,54 @@ export default function BudgetForm({
       </button>
     </form>
   );
+}
+
+// Helper to compute className
+function getAmountClass(amount, touched) {
+  if (isValidAmount(amount)) {
+    return "w-full border border-green-600 rounded px-2 py-1";
+  }
+  if (!touched) {
+    return "w-full border border-gray-300 rounded px-2 py-1";
+  }
+  return "w-full border border-red-600 rounded px-2 py-1";
+}
+
+// Helper to compute feedback message
+function getAmountMessage(amount, touched) {
+  if (!touched) {
+    return <p className="text-gray-400 text-xs">Enter a positive number.</p>;
+  }
+  if (!isValidAmount(amount)) {
+    return (
+      <p className="text-red-500 text-sm">Amount must be greater than 0.</p>
+    );
+  }
+  return null;
+}
+
+function getPlaceClass(place, touched) {
+  if (isValidPlace(place)) {
+    return "w-full border border-green-600 rounded px-2 py-1";
+  }
+  if (!touched) {
+    return "w-full border border-gray-300 rounded px-2 py-1";
+  }
+  return "w-full border border-red-600 rounded px-2 py-1";
+}
+
+function getPlaceMessage(place, touched) {
+  if (!touched) {
+    return (
+      <p className="text-gray-400 text-xs">Enter a place name (3–50 chars).</p>
+    );
+  }
+  if (!isValidPlace(place)) {
+    return (
+      <p className="text-red-500 text-sm">
+        Place must be between 3 and 50 characters.
+      </p>
+    );
+  }
+  return null;
 }
