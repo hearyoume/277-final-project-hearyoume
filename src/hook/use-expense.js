@@ -15,9 +15,14 @@ export default function useExpense() {
     setExpenses((prevExpenses) => [...prevExpenses, expense]);
   };
 
+  const deleteExpense = (expense) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.filter((e) => e.id !== expense.id)
+    );
+  };
+
   return {
     expenses,
-    setExpenses,
     filter,
     setFilter,
     amount,
@@ -33,5 +38,6 @@ export default function useExpense() {
     setTouchedAmount,
     touchedPlace,
     setTouchedPlace,
+    deleteExpense,
   };
 }
