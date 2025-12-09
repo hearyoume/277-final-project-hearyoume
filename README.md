@@ -39,3 +39,7 @@ A simple, maintainable React application for tracking personal expenses. Users c
 - format-currency.js: Ensures amounts are displayed consistently.
 - validators.js: Provides reusable validation logic.
 - validator.test.js: Confirms validation rules behave as expected.
+
+## Styling with Tailwind CSS
+
+Tailwind is used to style this App. Components are styled quickly without leaving JSX. It is consistent and responsive.
