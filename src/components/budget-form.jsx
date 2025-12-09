@@ -90,6 +90,7 @@ export default function BudgetForm({
           <option value="Vacation">Vacation</option>
           <option value="Entertainment">Entertainment</option>
           <option value="Utilities">Utilities</option>
+          <option value="Toiletries">Toiletries</option>
           <option value="Home Upkeep">Home Upkeep</option>
           <option value="Mortgage">Mortgage</option>
           <option value="Health">Health</option>
