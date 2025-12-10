@@ -17,6 +17,13 @@ export default function BudgetForm({
   setTouchedAmount,
   touchedPlace,
   setTouchedPlace,
+  categories,
+  showNewCategory,
+  setShowNewCategory,
+  newCategoryName,
+  setNewCategoryName,
+  handleAddNewCategory,
+  handleDeleteCategory,
 }) {
   // Handle form submission
   const handleSubmit = (e) => {
@@ -73,30 +80,74 @@ export default function BudgetForm({
 
       <div className="mb-2">
         <label
-          htmlFor="category-select"
+          htmlFor={showNewCategory ? "new-category-input" : "category-select"}
           className="block text-sm font-medium text-gray-700 mb-1"
         >
           Category:
         </label>
-        <select
-          id="category-select"
-          name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full border border-gray-300 rounded px-2 py-1"
-        >
-          <option value="Groceries">Groceries</option>
-          <option value="Eating Out">Eating Out</option>
-          <option value="Vacation">Vacation</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Utilities">Utilities</option>
-          <option value="Toiletries">Toiletries</option>
-          <option value="Home Upkeep">Home Upkeep</option>
-          <option value="Mortgage">Mortgage</option>
-          <option value="Health">Health</option>
-          <option value="Amazon">Amazon</option>
-          <option value="Other">Other</option>
-        </select>
+        {!showNewCategory ? (
+          <div className="flex gap-2">
+            <select
+              id="category-select"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="flex-1 border border-gray-300 rounded px-2 py-1"
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={() => setShowNewCategory(true)}
+              className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              + Add
+            </button>
+            {categories.length > 1 && (
+              <button
+                type="button"
+                onClick={handleDeleteCategory}
+                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                title="Delete current category"
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <input
+              id="new-category-input"
+              type="text"
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+              placeholder="New category name"
+              className="flex-1 border border-gray-300 rounded px-2 py-1"
+              autoFocus
+            />
+            <button
+              type="button"
+              onClick={handleAddNewCategory}
+              className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowNewCategory(false);
+                setNewCategoryName("");
+              }}
+              className="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
 
       <fieldset className="mt-3 border-t pt-3">
