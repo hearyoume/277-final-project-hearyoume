@@ -25,11 +25,36 @@ export default function App() {
     touchedPlace,
     setTouchedPlace,
     deleteExpense,
+    categories,
+    addCategory,
+    deleteCategory,
+    showNewCategory,
+    setShowNewCategory,
+    newCategoryName,
+    setNewCategoryName,
   } = useExpense();
 
   // Handle adding a new expense
   const handleAddExpense = (expense) => {
     addExpense(expense);
+  };
+
+  // Handle adding a new category
+  const handleAddNewCategory = () => {
+    if (newCategoryName.trim()) {
+      addCategory(newCategoryName.trim());
+      setCategory(newCategoryName.trim());
+      setNewCategoryName("");
+      setShowNewCategory(false);
+    }
+  };
+
+  // Handle deleting a category
+  const handleDeleteCategory = () => {
+    if (categories.length > 1) {
+      deleteCategory(category);
+      setCategory(categories.filter((cat) => cat !== category)[0]);
+    }
   };
 
   // Delete an expense by its ID
@@ -68,6 +93,13 @@ export default function App() {
               setTouchedAmount={setTouchedAmount}
               touchedPlace={touchedPlace}
               setTouchedPlace={setTouchedPlace}
+              categories={categories}
+              showNewCategory={showNewCategory}
+              setShowNewCategory={setShowNewCategory}
+              newCategoryName={newCategoryName}
+              setNewCategoryName={setNewCategoryName}
+              handleAddNewCategory={handleAddNewCategory}
+              handleDeleteCategory={handleDeleteCategory}
             />
           </section>
 
