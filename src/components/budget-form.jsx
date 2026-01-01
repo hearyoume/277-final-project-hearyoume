@@ -121,7 +121,7 @@ export default function BudgetForm({
             </div>
           </div>
         ) : (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <input
               id="new-category-input"
               type="text"
@@ -134,7 +134,7 @@ export default function BudgetForm({
             <button
               type="button"
               onClick={handleAddNewCategory}
-              className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+              className="min-w-[100px] px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
             >
               Save
             </button>
@@ -144,7 +144,7 @@ export default function BudgetForm({
                 setShowNewCategory(false);
                 setNewCategoryName("");
               }}
-              className="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
+              className="min-w-[100px] px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
             >
               Cancel
             </button>
