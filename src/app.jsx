@@ -73,8 +73,8 @@ export default function App() {
       <header className="bg-indigo-600 text-white py-6">
         <h1 className="text-2xl font-bold text-center">Budget Tracker</h1>
       </header>
-      <main className="flex-1 flex items-center justify-center w-full">
-        <div className="max-w-2xl w-full px-6 py-6 space-y-6">
+      <main className="flex-1 flex justify-center w-full">
+        <div className="max-w-2xl w-full px-6 py-6 space-y-6 ">
           <section aria-labelledby="add-expense-heading" className="">
             <h2 id="add-expense-heading" className="sr-only">
               Add Expense
