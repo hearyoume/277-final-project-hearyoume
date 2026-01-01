@@ -86,13 +86,13 @@ export default function BudgetForm({
           Category:
         </label>
         {!showNewCategory ? (
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2">
             <select
               id="category-select"
               name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="flex-1 border border-gray-300 rounded px-2 py-1"
+              className="flex-1 min-w-[150px] border border-gray-300 rounded px-2 py-1"
             >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
@@ -100,23 +100,25 @@ export default function BudgetForm({
                 </option>
               ))}
             </select>
-            <button
-              type="button"
-              onClick={() => setShowNewCategory(true)}
-              className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              + Add
-            </button>
-            {categories.length > 1 && (
+            <div className="flex gap-2 w-auto">
               <button
                 type="button"
-                onClick={handleDeleteCategory}
-                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                title="Delete current category"
+                onClick={() => setShowNewCategory(true)}
+                className="min-w-[100px] px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
               >
-                Delete
+                + Add
               </button>
-            )}
+              {categories.length > 1 && (
+                <button
+                  type="button"
+                  onClick={handleDeleteCategory}
+                  className="min-w-[100px] px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                  title="Delete current category"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           <div className="flex gap-2">
@@ -187,7 +189,7 @@ export default function BudgetForm({
       <button
         type="submit"
         disabled={!isValidAmount(amount) || !isValidPlace(place)}
-        className={`mt-3 px-4 py-2 rounded ${
+        className={`min-w-[100px] px-3 py-2 rounded ${
           !isValidAmount(amount) || !isValidPlace(place)
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-indigo-600 text-white"
