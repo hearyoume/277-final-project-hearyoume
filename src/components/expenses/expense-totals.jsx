@@ -15,7 +15,7 @@ export default function ExpenseTotals({ expenses }) {
     .reduce((sum, expense) => sum + expense.amount, 0);
 
   return (
-    <div className="mt-4 grid grid-cols-3 gap-4">
+    <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
       <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
         <p className="text-sm font-medium text-gray-600">All Expenses</p>
         <p className="text-2xl font-bold text-blue-600">
