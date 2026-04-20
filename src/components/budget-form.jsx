@@ -28,6 +28,10 @@ export default function BudgetForm({
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!category) {
+      return;
+    }
+
     const expense = {
       id: uuidv4(), // always unique
       amount: parseFloat(amount),
@@ -40,7 +44,7 @@ export default function BudgetForm({
     // Clear form fields after submission
     setAmount("");
     setPlace("");
-    setCategory("Amazon");
+    setCategory(categories[0] ?? "");
     setRecurring("one-time");
     setTouchedAmount(false);
     setTouchedPlace(false);
@@ -92,8 +96,14 @@ export default function BudgetForm({
               name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              disabled={categories.length === 0}
               className="flex-1 min-w-[150px] border border-gray-300 rounded px-2 py-1"
             >
+              <option value="" disabled>
+                {categories.length === 0
+                  ? "No categories yet - add one"
+                  : "Select a category"}
+              </option>
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -188,9 +198,9 @@ export default function BudgetForm({
       </fieldset>
       <button
         type="submit"
-        disabled={!isValidAmount(amount) || !isValidPlace(place)}
+        disabled={!isValidAmount(amount) || !isValidPlace(place) || !category}
         className={`min-w-[100px] px-3 py-2 rounded ${
-          !isValidAmount(amount) || !isValidPlace(place)
+          !isValidAmount(amount) || !isValidPlace(place) || !category
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-indigo-600 text-white"
         }`}
