@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DEFAULT_CATEGORIES = [
   "Groceries",
@@ -19,12 +19,12 @@ export default function useExpense() {
   const [expenses, setExpenses] = useLocalStorage("expenses", []);
   const [categories, setCategories] = useLocalStorage(
     "categories",
-    DEFAULT_CATEGORIES
+    DEFAULT_CATEGORIES,
   );
   const [filter, setFilter] = useState("all");
   const [amount, setAmount] = useState("");
   const [place, setPlace] = useState("");
-  const [category, setCategory] = useState("Amazon");
+  const [category, setCategory] = useState(() => categories[0] ?? "");
   const [recurring, setRecurring] = useState("one-time");
   const [touchedAmount, setTouchedAmount] = useState(false);
   const [touchedPlace, setTouchedPlace] = useState(false);
@@ -47,9 +47,20 @@ export default function useExpense() {
 
   const deleteCategory = (categoryToDelete) => {
     setCategories((prevCategories) =>
-      prevCategories.filter((cat) => cat !== categoryToDelete)
+      prevCategories.filter((cat) => cat !== categoryToDelete),
     );
   };
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      setCategory("");
+      return;
+    }
+
+    if (!categories.includes(category)) {
+      setCategory(categories[0]);
+    }
+  }, [categories, category]);
 
   return {
     expenses,
